@@ -1,88 +1,157 @@
-<div class="container mx-auto p-4 max-w-5xl">
+<div class="container mx-auto p-6 max-w-6xl">
     
-    <h1 class="text-3xl font-bold text-gray-800 mb-6">Lista de productos</h1>
-    
-    <div class="bg-blue-50 border-l-4 border-blue-500 p-4 mb-8 rounded shadow-sm text-sm">
-        <p class="font-semibold text-gray-700 mb-2">Productos: <span class="font-normal">{{ productos }}</span></p>
-        <div class="grid grid-cols-2 md:grid-cols-3 gap-2 text-gray-600 mt-3">
-            <p><span class="font-medium text-gray-800">Nombre:</span> {{ nombre }}</p>
-            <p><span class="font-medium text-gray-800">Precio:</span> {{ precio }}</p>
-            <p><span class="font-medium text-gray-800">Stock:</span> {{ stock }}</p>
-            <p><span class="font-medium text-gray-800">Imagen:</span> {{ imagen }}</p>
-            <p class="col-span-2"><span class="font-medium text-gray-800">Descripción:</span> {{ descripcion }}</p>
-        </div>
+    <!-- Title -->
+    <div class="flex items-center gap-3 mb-6">
+        <i class="pi pi-shopping-bag text-3xl font-bold text-blue-600"></i>
+        <h1 class="text-3xl font-bold text-gray-800">Panel de Productos</h1>
     </div>
-
-    <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-8 border border-gray-200">
-        <h2 class="text-xl font-semibold mb-6 text-gray-700">Añadir / Editar Producto</h2>
-        
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div class="mb-4">
-                <label class="block text-gray-700 text-sm font-bold mb-2" for="nombre">Ingrese Nombre:</label>
-                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-400" type="text" id="nombre" [(ngModel)]="nombre">
+    
+    <!-- Live Preview Cards -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+        <div class="bg-blue-50 border-l-4 border-blue-500 p-5 rounded shadow-sm text-sm col-span-1 md:col-span-3 flex flex-col gap-3">
+            <div class="flex items-center gap-2 text-blue-800 font-bold text-base border-b pb-2">
+                <i class="pi pi-chart-bar"></i>
+                <span>Vista Previa y Resumen</span>
             </div>
             
-            <div class="mb-4">
-                <label class="block text-gray-700 text-sm font-bold mb-2" for="precio">Ingrese Precio:</label>
-                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-400" type="number" step="0.01" id="precio" [(ngModel)]="precio">
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-4 mt-2">
+                <div class="p-3 bg-white rounded border border-blue-100 shadow-xs">
+                    <span class="text-xs text-gray-400 block font-semibold uppercase">Total Productos</span>
+                    <span class="text-lg font-bold text-blue-700">{{ productos.length }}</span>
+                </div>
+                <div class="p-3 bg-white rounded border border-blue-100 shadow-xs">
+                    <span class="text-xs text-gray-400 block font-semibold uppercase">Nombre Preview</span>
+                    <span class="text-sm font-bold text-gray-700 truncate block" [title]="nombre">{{ nombre || '-' }}</span>
+                </div>
+                <div class="p-3 bg-white rounded border border-blue-100 shadow-xs">
+                    <span class="text-xs text-gray-400 block font-semibold uppercase">Precio Preview</span>
+                    <span class="text-sm font-bold text-gray-700 block">${{ precio }}</span>
+                </div>
+                <div class="p-3 bg-white rounded border border-blue-100 shadow-xs">
+                    <span class="text-xs text-gray-400 block font-semibold uppercase">Stock Preview</span>
+                    <span class="text-sm font-bold text-gray-700 block">{{ stock }}</span>
+                </div>
+                <div class="p-3 bg-white rounded border border-blue-100 shadow-xs">
+                    <span class="text-xs text-gray-400 block font-semibold uppercase">Descripción Preview</span>
+                    <span class="text-sm text-gray-600 block truncate" [title]="descripcion">{{ descripcion || '-' }}</span>
+                </div>
             </div>
-
-            <div class="mb-4">
-                <label class="block text-gray-700 text-sm font-bold mb-2" for="stock">Ingrese Stock:</label>
-                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-400" type="number" id="stock" [(ngModel)]="stock">
-            </div>
-
-            <div class="mb-4">
-                <label class="block text-gray-700 text-sm font-bold mb-2" for="imagen">Ingrese Imagen:</label>
-                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-400" type="text" id="imagen" [(ngModel)]="imagen">
-            </div>
-
-            <div class="mb-6 md:col-span-2">
-                <label class="block text-gray-700 text-sm font-bold mb-2" for="descripcion">Ingrese descripción:</label>
-                <textarea class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-400 h-24 resize-none" id="descripcion" [(ngModel)]="descripcion"></textarea>
-            </div>
-        </div>
-        
-        <div class="flex items-center justify-end mt-2">
-            <button class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded focus:outline-none focus:ring-2 focus:ring-blue-400 shadow-md transition duration-200 ease-in-out" (click)="funGuardar()">
-                Guardar
-            </button>
         </div>
     </div>
 
-    <div class="overflow-x-auto bg-white rounded-lg shadow border border-gray-200">
-        <table class="min-w-full leading-normal">
-            <thead>
+    <!-- Form Section -->
+    <div class="bg-white shadow-md rounded-xl p-6 mb-8 border border-gray-200">
+        <div class="flex items-center gap-2 mb-6 border-b pb-3">
+            <i class="pi pi-file-edit text-blue-600 text-xl font-semibold"></i>
+            <h2 class="text-xl font-bold text-gray-700">
+                {{ editando ? 'Editar Producto #' + (posicion + 1) : 'Añadir Nuevo Producto' }}
+            </h2>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- Nombre -->
+            <div class="flex flex-col gap-2">
+                <label class="font-bold text-gray-700 text-sm" for="nombre">Nombre:</label>
+                <p-inputgroup>
+                    <p-inputgroup-addon>
+                        <i class="pi pi-tag text-gray-400"></i>
+                    </p-inputgroup-addon>
+                    <input pInputText class="w-full" type="text" id="nombre" [(ngModel)]="nombre" placeholder="Ingrese nombre del producto">
+                </p-inputgroup>
+            </div>
+            
+            <!-- Precio -->
+            <div class="flex flex-col gap-2">
+                <label class="font-bold text-gray-700 text-sm" for="precio">Precio:</label>
+                <p-inputgroup>
+                    <p-inputgroup-addon>
+                        <i class="pi pi-dollar text-gray-400"></i>
+                    </p-inputgroup-addon>
+                    <p-inputNumber id="precio" [(ngModel)]="precio" [minFractionDigits]="2" class="w-full" styleClass="w-full" inputStyleClass="w-full" placeholder="0.00"></p-inputNumber>
+                </p-inputgroup>
+            </div>
+
+            <!-- Stock -->
+            <div class="flex flex-col gap-2">
+                <label class="font-bold text-gray-700 text-sm" for="stock">Stock:</label>
+                <p-inputgroup>
+                    <p-inputgroup-addon>
+                        <i class="pi pi-box text-gray-400"></i>
+                    </p-inputgroup-addon>
+                    <p-inputNumber id="stock" [(ngModel)]="stock" class="w-full" styleClass="w-full" inputStyleClass="w-full" placeholder="0"></p-inputNumber>
+                </p-inputgroup>
+            </div>
+
+            <!-- Imagen -->
+            <div class="flex flex-col gap-2">
+                <label class="font-bold text-gray-700 text-sm" for="imagen">URL de la Imagen:</label>
+                <p-inputgroup>
+                    <p-inputgroup-addon>
+                        <i class="pi pi-image text-gray-400"></i>
+                    </p-inputgroup-addon>
+                    <input pInputText class="w-full" type="text" id="imagen" [(ngModel)]="imagen" placeholder="https://ejemplo.com/imagen.jpg">
+                </p-inputgroup>
+            </div>
+
+            <!-- Descripción -->
+            <div class="md:col-span-2 flex flex-col gap-2">
+                <label class="font-bold text-gray-700 text-sm" for="descripcion">Descripción:</label>
+                <textarea pInputTextarea class="w-full h-24 resize-none" id="descripcion" [(ngModel)]="descripcion" placeholder="Escriba una descripción detallada del producto..."></textarea>
+            </div>
+        </div>
+        
+        <!-- Guardar button -->
+        <div class="flex items-center justify-end mt-6 gap-3">
+            @if (editando) {
+                <p-button label="Cancelar" icon="pi pi-times" severity="secondary" (click)="editando = false" [outlined]="true"></p-button>
+            }
+            <p-button [label]="editando ? 'Actualizar Producto' : 'Guardar Producto'" [icon]="editando ? 'pi pi-check' : 'pi pi-save'" severity="success" (click)="funGuardar()"></p-button>
+        </div>
+    </div>
+
+    <!-- Table Section -->
+    <div class="shadow-md rounded-xl overflow-hidden border border-gray-200 bg-white">
+        <p-table [value]="productos" [responsiveLayout]="'scroll'" styleClass="p-datatable-striped">
+            <ng-template pTemplate="header">
                 <tr>
-                    <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-50 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">NOMBRE</th>
-                    <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-50 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">PRECIO</th>
-                    <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-50 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">STOCK</th>
-                    <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-50 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">IMAGEN</th>
-                    <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-50 text-center text-xs font-semibold text-gray-600 uppercase tracking-wider">ACCIÓN</th>
+                    <th class="bg-gray-50 text-gray-700 font-bold py-3 px-4"><i class="pi pi-tag text-gray-400 mr-2"></i> NOMBRE</th>
+                    <th class="bg-gray-50 text-gray-700 font-bold py-3 px-4"><i class="pi pi-dollar text-gray-400 mr-2"></i> PRECIO</th>
+                    <th class="bg-gray-50 text-gray-700 font-bold py-3 px-4"><i class="pi pi-box text-gray-400 mr-2"></i> STOCK</th>
+                    <th class="bg-gray-50 text-gray-700 font-bold py-3 px-4"><i class="pi pi-image text-gray-400 mr-2"></i> IMAGEN</th>
+                    <th class="bg-gray-50 text-gray-700 font-bold text-center py-3 px-4"><i class="pi pi-cog text-gray-400 mr-2"></i> ACCIONES</th>
                 </tr>
-            </thead>
-            <tbody>
-                @for (prod of productos; track $index) {
-                    <tr class="hover:bg-gray-50 transition duration-150 ease-in-out">
-                        <td class="px-5 py-4 border-b border-gray-200 text-sm text-gray-800">{{ prod.nombre }}</td>
-                        <td class="px-5 py-4 border-b border-gray-200 text-sm text-gray-800 font-medium">{{ prod.precio }}</td>
-                        <td class="px-5 py-4 border-b border-gray-200 text-sm text-gray-800">
-                            <span class="px-2 py-1 bg-green-100 text-green-800 rounded-full text-xs font-semibold">{{ prod.stock }}</span>
-                        </td>
-                        <td class="px-5 py-4 border-b border-gray-200 text-sm">
-                            <img [src]="prod.imagen" alt="Imagen de {{ prod.nombre }}" class="w-16 h-16 object-cover rounded shadow-sm border border-gray-100">
-                        </td>
-                        <td class="px-5 py-4 border-b border-gray-200 text-sm text-center space-x-2">
-                            <button class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-1 px-3 rounded shadow transition duration-200" (click)="funEditar(prod, $index)">
-                                Editar
-                            </button>
-                            <button class="bg-red-500 hover:bg-red-600 text-white font-bold py-1 px-3 rounded shadow transition duration-200" (click)="funEliminar($index)">
-                                Eliminar
-                            </button>
-                        </td>
-                    </tr>
-                }
-            </tbody>
-        </table>
+            </ng-template>
+            <ng-template pTemplate="body" let-prod let-rowIndex="rowIndex">
+                <tr class="hover:bg-gray-50 transition duration-150 border-b border-gray-100">
+                    <td class="text-gray-800 font-medium py-4 px-4">{{ prod.nombre }}</td>
+                    <td class="text-gray-800 py-4 px-4 font-semibold">${{ prod.precio }}</td>
+                    <td class="py-4 px-4">
+                        <span class="px-2.5 py-1 rounded-full text-xs font-bold"
+                              [class]="prod.stock > 0 ? 'bg-emerald-100 text-emerald-800' : 'bg-rose-100 text-rose-800'">
+                            {{ prod.stock > 0 ? prod.stock + ' unidades' : 'Agotado' }}
+                        </span>
+                    </td>
+                    <td class="py-4 px-4">
+                        <img [src]="prod.imagen || 'https://images.unsplash.com/photo-1531403009284-440f080d1e12?w=150'" alt="Imagen de {{ prod.nombre }}" class="w-14 h-14 object-cover rounded-lg shadow-sm border border-gray-100">
+                    </td>
+                    <td class="py-4 px-4 text-center">
+                        <div class="flex justify-center gap-2">
+                            <p-button icon="pi pi-pencil" severity="warn" size="small" [rounded]="true" [text]="true" (click)="funEditar(prod, rowIndex)" title="Editar"></p-button>
+                            <p-button icon="pi pi-trash" severity="danger" size="small" [rounded]="true" [text]="true" (click)="funEliminar(rowIndex)" title="Eliminar"></p-button>
+                        </div>
+                    </td>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="emptystate">
+                <tr>
+                    <td colspan="5" class="text-center py-8 text-gray-500">
+                        <div class="flex flex-col items-center gap-3">
+                            <i class="pi pi-inbox text-4xl text-gray-300"></i>
+                            <span>No hay productos registrados aún. ¡Añade tu primer producto arriba!</span>
+                        </div>
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
     </div>
 </div>

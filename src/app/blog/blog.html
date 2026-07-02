@@ -1,0 +1,39 @@
+@if (cargando()) {
+<div class="flex justify-content-center align-items-center p-4">
+    <p-progressSpinner ariaLabel="Loading"></p-progressSpinner>
+</div>
+}
+
+<div class="p-5">
+    <h1 class="text-center mb-4 text-primary font-bold text-4xl">Lista de Publicaciones</h1>
+
+    <div class="grid">
+        @for (publi of publicaciones(); track $index) {
+        <div class="col-12 md:col-6 lg:col-4 p-3">
+            <p-card styleClass="h-full shadow-2 hover:shadow-4">
+
+                <ng-template pTemplate="header">
+                    @if (publi.cover_image) {
+                    <img [src]="publi.cover_image" class="w-full border-round-top"
+                        style="height: 220px; object-fit: cover;" alt="{{ publi.title }}">
+                    } @else {
+                    <div class="surface-200 flex align-items-center justify-content-center w-full border-round-top"
+                        style="height: 220px;">
+                        <i class="pi pi-image text-500 text-6xl"></i>
+                    </div>
+                    }
+                </ng-template>
+
+                <div class="flex flex-column h-full">
+                    <h5 class="text-xl font-semibold text-900 m-0 mb-3">{{ publi.title }}</h5>
+                </div>
+
+                <ng-template pTemplate="footer">
+                    <p-button label="Leer más" styleClass="w-full"></p-button>
+                </ng-template>
+
+            </p-card>
+        </div>
+        }
+    </div>
+</div>

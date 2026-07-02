@@ -1,9 +1,25 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { Button } from 'primeng/button';
+import { InputText } from 'primeng/inputtext';
+import { InputNumber } from 'primeng/inputnumber';
+import { Textarea } from 'primeng/textarea';
+import { TableModule } from 'primeng/table';
+import { InputGroup } from 'primeng/inputgroup';
+import { InputGroupAddon } from 'primeng/inputgroupaddon';
 
 @Component({
   selector: 'app-producto',
-  imports: [FormsModule],
+  imports: [
+    FormsModule,
+    Button,
+    InputText,
+    InputNumber,
+    Textarea,
+    TableModule,
+    InputGroup,
+    InputGroupAddon
+  ],
   templateUrl: './producto.html',
   styleUrl: './producto.css',
 })
